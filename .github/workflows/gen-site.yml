@@ -8,6 +8,9 @@ on:
       - packages/**
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   gen-site:
     runs-on: ubuntu-latest
@@ -35,8 +38,8 @@ jobs:
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
-          apt update
-          apt install -y aptly
+          sudo apt update
+          sudo apt install -y aptly
 
           aptly repo create discord
           aptly repo add discord packages/*.deb
