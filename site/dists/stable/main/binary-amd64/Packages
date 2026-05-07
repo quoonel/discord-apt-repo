@@ -1,0 +1,20 @@
+Package: discord
+Priority: optional
+Section: net
+Installed-Size: 4280
+Maintainer: Discord Maintainer Team <noreply@discord.com>
+Architecture: amd64
+Version: 1.0.136
+Depends: libc6, libasound2, libatk1.0-0, libatk-bridge2.0-0, libatspi2.0-0, libatomic1, libcairo2, libdbus-1-3, libexpat1, libgbm1, libglib2.0-0, libgtk-3-0, libnotify4, libnspr4, libnss3, libpango-1.0-0, libstdc++6, libudev1, libx11-6, libxcb1, libxcomposite1, libxdamage1, libxext6, libxfixes3, libxkbcommon0, libxrandr2
+Recommends: libunity9, libva2, libpipewire-0.3-0
+Filename: pool/main/d/discord/discord-1.0.136.deb
+Size: 2178048
+MD5sum: 2a97eb542cbb56731b1b1c0c6de701bc
+SHA1: be5a040c634e241782af62f37406ae28b020ddc4
+SHA256: b5cf66221b46f3f744ea571fbf774def8425e791a491f3b01874305e2d307715
+SHA512: 9da10cf670ab309fefccd96b681b2119fdc47a16f69c1854e792f6e5f143ec5a106757e6e63dfb178dcb6c772b1df2ce27cf12a3fbad86def3961705e76bdece
+Description: Chat for Communities and Friends
+ Discord is the easiest way to communicate over voice, video, and text. Chat,
+ hang out, and stay close with your friends and communities.
+Homepage: https://discord.com
+
