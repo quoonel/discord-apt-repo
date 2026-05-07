@@ -15,14 +15,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+
       - name: Import GPG Key
         env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.gnupg
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           chmod 700 ~/.gnupg
-          echo "${GPG_PRIVATE_KEY}" | gpg --import
-          gpg --list-secret-keys
+          # Restart the agent to apply changes
+          gpgconf --kill gpg-agent
+
+          # Import using the passphrase secret
+          echo "${GPG_PRIVATE_KEY}" | gpg --batch --no-tty --passphrase "${GPG_PASSPHRASE}" --import
 
       - name: Generate the site (APT repository)
         env:
