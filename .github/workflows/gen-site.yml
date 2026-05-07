@@ -1,4 +1,4 @@
-name: Generate the site
+name: Generate the site (APT repository)
 
 on:
   push:
@@ -8,11 +8,10 @@ on:
       - packages/**
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   gen-site:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
