@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetches all history, required for triggers to work
+
       - name: Download Discord package
         run: |
           wget --content-disposition "https://discord.com/api/download?platform=linux"

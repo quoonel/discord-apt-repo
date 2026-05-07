@@ -16,7 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 0  # Fetches all history, required for triggers to work
 
       - name: Import GPG Key
         env:
