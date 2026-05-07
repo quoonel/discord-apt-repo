@@ -21,6 +21,10 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
             echo "Changes detected!"
+
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --global user.name "github-actions[bot]"
+
             git commit -m "chore: add Discord deb packages"
             git push origin main
           else
