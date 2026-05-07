@@ -1,0 +1,30 @@
+name: Add Discord deb packages
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-discord-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download Discord package
+        run: |
+          wget --content-disposition "https://discord.com/api/download?platform=linux"
+          mv discord-*.deb packages
+          git add packages/
+
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Changes detected!"
+            git commit -m "chore: add Discord deb packages"
+            git push origin main
+          else
+            echo "No changes, working copy is clean."
+            exit 0
+          fi

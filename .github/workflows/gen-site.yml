@@ -1,0 +1,43 @@
+name: Generate the site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/**
+  workflow_dispatch:
+
+jobs:
+  gen-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Import GPG Key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.gnupg
+          chmod 700 ~/.gnupg
+          echo "${GPG_PRIVATE_KEY}" | gpg --import
+          gpg --list-secret-keys
+
+      - name: Generate the site (APT repository)
+        env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          apt update
+          apt install -y aptly
+
+          aptly repo create discord
+          aptly repo add discord packages/*.deb
+          aptly publish repo -distribution=stable -passphrase="${GPG_PASSPHRASE}" discord
+          # It publishes the repo in ~/.aptly/public/
+
+          rsync -avP --delete ~/.aptly/public/ site/
+
+          git add site/
+          git commit -m "chore: add site"
+          git push origin main
