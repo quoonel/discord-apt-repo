@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetches all history, required for triggers to work
+          token: ${{ secrets.GH_PAT }} # Uses your PAT instead of GITHUB_TOKEN to trigger subsequent workflows
 
       - name: Download Discord package
         run: |
