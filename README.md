@@ -26,3 +26,5 @@ Install Discord:
 apt update
 apt install discord
 ```
+
+ℹ️ When APT udpates the `discord` package, it closes automatically the Discord app. You must relaunch it manually.
