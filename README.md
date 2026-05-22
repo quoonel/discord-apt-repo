@@ -1,3 +1,5 @@
+⚠️ Discontinued in favor of https://snapcraft.io/discord
+
 # discord-apt-repo
 
 This repository is to provide an APT repository for Discord deb packages.
